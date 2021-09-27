@@ -38,8 +38,10 @@ class region_locator_GUI(tk.Tk):
         
 
         self.bind('<Return>', (lambda event, e=self._ents : self.screen_shot(e))) 
-        self.button = ttk.Button(self, text='Screenshot')
-        self.button['command'] = lambda e=self._ents: self.screen_shot(e)
+        self.button = ttk.Button(
+            self, 
+            text='Screenshot',
+            command=lambda e=self._ents: self.screen_shot(e))
         self.button.pack(expand=True, ipadx=10, ipady=2)
 
 
