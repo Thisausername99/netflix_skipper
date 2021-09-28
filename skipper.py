@@ -4,6 +4,11 @@ import threading
 import pyautogui
 import time
 import math
+import os.path 
+
+class DirectoryNotExist(Exception):
+    """Raised when the input value is too small"""
+    pass
 
 
 class netflix_skipperino(threading.Thread):
@@ -67,9 +72,13 @@ class netflix_skipperino(threading.Thread):
 
 
     def setup_path(self):
-        self._button_path["skip"] = "next_15.png"
-        self._button_path["recap"] = "recap_15.png"
+        if self._intro:
+            self._button_path["intro"] = "resource/intro.png"
+        
+        if self._recap:
+            self._button_path["recap"] = "resource/recap_15.png"
 
+        self._button_path["skip"] = "resource/next_15.png"
 
     def pause(self):
         self._halt.set()

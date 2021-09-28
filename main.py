@@ -1,9 +1,9 @@
 import skipper
-import time
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import *
 import threading
+import os.path
 
 Font_tuple = ('Digital-7', 9, 'bold')
 class App(tk.Tk):
@@ -67,6 +67,18 @@ class App(tk.Tk):
         self._start_btn.place(relx=0.43, rely=0.85, anchor=CENTER)
 
 
+    def validate_img_path(self, boxes):
+        if os.path.isdir("resource"):
+            if boxes[0][1] and not os.path.exists("resource/recap.png"):
+                raise ValueError('Recap img not exist')
+
+            if boxes[1][1] and not os.path.exists("resource/intro.png"):
+                raise ValueError('Intro img not exist')
+
+            if not os.path.isfile("resource/next.png"):
+                raise ValueError('Skip img not exist')
+        else:
+            raise ValueError('Directory not exist')
     #Update status of tool
     def status_update(self):
         status = self._thread.status
@@ -80,7 +92,7 @@ class App(tk.Tk):
             self._thread.pause()
             self._thread.join()
         else:
-            messagebox.showerror("Error", "Tool is not running")
+            messagebox.showerror("Error", "Tool not running")
 
 
     def build_GUI(self, fields, check_boxes):
@@ -138,11 +150,15 @@ class App(tk.Tk):
         
         if self._thread.is_alive():
             self.stop() 
-        
-        self._thread.start()
-        self.status_update()
-        
+            
+        try:
+            self.validate_img_path(boxes)
+            self._thread.start()
+            self.status_update()
+        except ValueError as err:
+            messagebox.showerror("Error",err.args[0])
 
     
 if __name__=="__main__":
     App().mainloop()
+    
