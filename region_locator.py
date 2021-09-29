@@ -9,9 +9,9 @@ from tkinter import messagebox
 
  
 
-class region_locator_GUI(tk.Tk):
-    def __init__(self):
-        super().__init__()
+class region_locator_GUI(Toplevel):
+    def __init__(self, master = None):
+        super().__init__(master = master)
         self._fields = "x","y","Width","Height"
         self.title('Region Locator')
         self.resizable(0, 0)
@@ -75,6 +75,6 @@ class region_locator_GUI(tk.Tk):
 
 
 
-if __name__ == "__main__":
-    region_locator_GUI().mainloop()
+# if __name__ == "__main__":
+#     region_locator_GUI().mainloop()
     

@@ -4,11 +4,9 @@ import threading
 import pyautogui
 import time
 import math
-import os.path 
+ 
 
-class DirectoryNotExist(Exception):
-    """Raised when the input value is too small"""
-    pass
+
 
 
 class netflix_skipperino(threading.Thread):

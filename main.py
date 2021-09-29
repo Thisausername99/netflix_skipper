@@ -1,4 +1,5 @@
 import skipper
+import region_locator
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import *
@@ -43,42 +44,61 @@ class App(tk.Tk):
             font = Font_tuple,
             foreground = '#E50914')
 
+        self._btn_frame = tk.Frame(self)
+        
         self._start_btn = tk.Button(
-            self, 
+            self._btn_frame, 
             width = 5,
             relief = tk.RIDGE,
-            fg='#E50914',
+            # fg='#E50914',
             font = Font_tuple,
             text='Start',
             command = lambda e=self._ents, b=self._bxes : self.start_skipper(e,b))
 
         self._stop_btn = tk.Button(
-            self, 
+            self._btn_frame, 
             width = 5,
             relief = tk.RIDGE,
-            font = Font_tuple, 
+            font = Font_tuple,
+            # fg='#E50914', 
             text='Stop', 
             command= self.stop)
         
+        self._locator_btn = tk.Button(
+            self._btn_frame,
+            width = 7,
+            relief = tk.RIDGE,
+            fg='#E50914',
+            font = Font_tuple,
+            text = 'Locator' 
+        )
+        
+        self._locator_btn.bind("<Button>", lambda e: region_locator.region_locator_GUI(self))
+        
+        
         self._status_bar.pack(pady = 15, anchor=CENTER)
-        self._start_btn.pack()
-        self._stop_btn.pack() 
-        self._stop_btn.place(relx=0.58, rely=0.85, anchor=CENTER)
-        self._start_btn.place(relx=0.43, rely=0.85, anchor=CENTER)
-
-
+        self._start_btn.pack(side = LEFT, anchor=CENTER)
+        self._locator_btn.pack(side = LEFT, anchor=CENTER)
+        self._stop_btn.pack(side = LEFT, anchor=CENTER)
+        self._btn_frame.pack()
+        
+    #     self._start_btn.place(rely=0.85, anchor=CENTER)
+    #     self._locator_btn.place(rely=0.85, anchor=CENTER)
+    #     self._stop_btn.place(relx=0.65, rely=0.85, anchor=CENTER)
+    # #check if directory exist and if image for condition exist
     def validate_img_path(self, boxes):
         if os.path.isdir("resource"):
-            if boxes[0][1] and not os.path.exists("resource/recap.png"):
+            if boxes[0][1].get() and not os.path.exists("resource/recap.png"):
                 raise ValueError('Recap img not exist')
 
-            if boxes[1][1] and not os.path.exists("resource/intro.png"):
+            if boxes[1][1].get() and not os.path.exists("resource/intro.png"):
                 raise ValueError('Intro img not exist')
 
             if not os.path.isfile("resource/next.png"):
                 raise ValueError('Skip img not exist')
         else:
             raise ValueError('Directory not exist')
+            
     #Update status of tool
     def status_update(self):
         status = self._thread.status
@@ -108,19 +128,19 @@ class App(tk.Tk):
             entries.append((field, ent))
         
         for box in check_boxes:
+            bool_var = BooleanVar()
             frame = tk.Frame(self)
             button = Checkbutton(
                 frame, 
                 text=box, 
                 relief = SUNKEN,
                 font = Font_tuple, 
-                fg='#E50914',
                 variable=BooleanVar(), 
                 width=5, 
                 anchor = W)
             frame.pack(side=TOP, pady=5)
             button.pack()
-            boxes.append((box, button))
+            boxes.append((box, bool_var))
         return entries, boxes
 
 
@@ -137,9 +157,8 @@ class App(tk.Tk):
 
                 if e[0] == "Duration" and isinstance(int(e[1].get()), int):
                     self._thread.duration = int(e[1].get()) * 60
-
         except:
-            messagebox.showerror("Invalid", "Inputs not exceptable")
+            messagebox.showerror("Invalid", "Input not exceptable")
             return
 
         for b in boxes:
