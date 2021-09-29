@@ -11,7 +11,7 @@ import math
 
 class netflix_skipperino(threading.Thread):
     
-    def __init__(self):
+    def __init__(self, confidence = 0.9):
         threading.Thread.__init__(self, daemon=True)
         self._status = "Dead"
         self._start_time = 0
@@ -21,6 +21,7 @@ class netflix_skipperino(threading.Thread):
         self._recap = False
         self._button_path = {}
         self._region_map = {}
+        self._conf = confidence
         self._halt = threading.Event()
 
     @property
@@ -121,7 +122,7 @@ class netflix_skipperino(threading.Thread):
         x, y = None, None
         while attempt > 0 and not is_killed:
             if self.region_map["recap"]:
-                button_location = pyautogui.locateOnScreen(self._button_path["recap"], confidence = 0.9, region = self.region_map["recap"])
+                button_location = pyautogui.locateOnScreen(self._button_path["recap"], confidence = self._conf, region = self.region_map["recap"])
                 x,y = pyautogui.center(button_location)
 
             else:
@@ -146,10 +147,10 @@ class netflix_skipperino(threading.Thread):
         is_killed = False
         while attempt > 0 and not is_killed:
             if "skip" in self._region_map:
-                x, y = pyautogui.locateCenterOnScreen(self._button_path["skip"], confidence=0.9, region = self.region_map["skip"])
+                x, y = pyautogui.locateCenterOnScreen(self._button_path["skip"], confidence=self._conf, region = self.region_map["skip"])
             
             else:
-                button = pyautogui.locateOnScreen(self._button_path["skip"], confidence = 0.6)
+                button = pyautogui.locateOnScreen(self._button_path["skip"], confidence = self._conf)
                 if button:
                     try:
                         x, y = pyautogui.center(button)
@@ -158,7 +159,7 @@ class netflix_skipperino(threading.Thread):
             
             if x and y:
                 pyautogui.click(x,y)
-                print("Skipped!")
+                # print("Skipped!")
                 return
 
             attempt-= 1
