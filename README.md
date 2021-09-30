@@ -30,11 +30,11 @@ Netflix xkipper utilizes the advantage of python's massive open source library t
 - [pyautogui] - An interface to automate mouse and keyboard interactions with image detection
 
     
-## [Installation] (https://github.com/Thisausername99/netflix_skipper/releases)
+## Installation
 
 Netflix xkipper require [Python 3] and above to run.
 
-1. Go to release and download the dist zip file (use latest version)
+1. Go to [release](https://github.com/Thisausername99/netflix_skipper/releases) and download the dist zip file (use latest version)
 
 2. Unpack the zip file and run **app.exe**
 
