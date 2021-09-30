@@ -6,8 +6,11 @@ who just want to sit back, relax, and enjoy their favourite shows hand-free!
 
 
 ## Guides
-1. Use locator to spawn a locator tool to calibrate the dimension - x, y, width, height - of the button image - intro, recap, skip - with the following formula:
-    - ![Formula] x = x_top_left, y = y_top_left, width = x_bottom_right - x_top_left, height = y_bottom_right - y_top_right  
+1. Use locator to spawn a locator tool to calibrate the dimension - **x, y, width, height** - of the button image - **intro, recap, skip** - with the following formula:
+    - x = x_top_left
+    - y = y_top_left
+    - width = x_bottom_right - x_top_left
+    - height = y_bottom_right - y_top_right  
 
 2. Use screenshot button of locator tool to take a snap shot of the button and save it in the resouce folder under recap.png for recap, intro.png for intro, and skip.png for skip.
 
@@ -19,7 +22,7 @@ who just want to sit back, relax, and enjoy their favourite shows hand-free!
 
 4. Warning! If you stop midway, you will need to stop the tool and redo the math for **Start frame** and **Duration**
 
-## Tech
+## Library
 
 Netflix xkipper utilizes the advantage of python's massive open source library to envelop itself:
 - [Tkinter] - An interface for python's GUI tk toolkit
@@ -27,7 +30,7 @@ Netflix xkipper utilizes the advantage of python's massive open source library t
 - [pyautogui] - An interface to automate mouse and keyboard interactions with image detection
 
     
-## Installation
+## [Installation] (https://github.com/Thisausername99/netflix_skipper/releases)
 
 Netflix xkipper require [Python 3] and above to run.
 
@@ -40,6 +43,5 @@ Netflix xkipper require [Python 3] and above to run.
 
 - MIT
 
-- Icon tribute
-<div>Icons made by <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+- <div>Icons made by <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
