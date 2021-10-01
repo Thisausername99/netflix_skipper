@@ -4,10 +4,11 @@ import threading
 import pyautogui
 import time
 import math
- 
+import logging
 
 
-
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
+logger = logging.getLogger(__name__)
 
 class netflix_skipperino(threading.Thread):
     
@@ -124,7 +125,7 @@ class netflix_skipperino(threading.Thread):
                     x, y = pyautogui.center(button)
                     pyautogui.click(x,y)
             except:
-                print("can not center button")
+                logger.warning("could not skip intro or recap for %s times", attempt)
             attempt +=1
             is_killed = self._halt.wait(2)    
 

@@ -6,7 +6,8 @@ from tkinter import ttk
 from tkinter import *
 from tkinter import messagebox
 
- 
+
+
 
 class region_locator_GUI(Toplevel):
     def __init__(self, master = None):
@@ -18,32 +19,33 @@ class region_locator_GUI(Toplevel):
         self['bg'] = 'black'
 
         # change the background color to black
-        self.style = ttk.Style(self)
-        self.style.configure(
+        self._style = ttk.Style(self)
+        self._style.configure(
             'TLabel',
             background='black',
             foreground='red')
-
+        
         # label
         self._ents = self.generate_field(["x","y","width","height"])
          
-        self.label = ttk.Label(
+        self._label = ttk.Label(
             self,
             text='x:y',
             font=('Digital-7', 40))
 
-        self.label.pack(expand=True)
-        self.label.after(1000, self.update)
+        self._label.pack(expand=True)
+        self._label.after(1000, self.update)
         
 
         self.bind('<Return>', (lambda event, e=self._ents : self.screen_shot(e))) 
-        self.button = ttk.Button(
+        self._button = ttk.Button(
             self, 
             text='Screenshot',
             command=lambda e=self._ents: self.screen_shot(e))
-        self.button.pack(expand=True, ipadx=10, ipady=2)
+        self._button.pack(expand=True, ipadx=10, ipady=2)
 
-
+    
+    
     def generate_field(self, fields):
         entries = []
         for field in fields:
@@ -73,7 +75,4 @@ class region_locator_GUI(Toplevel):
         self.label.after(100, self.update)
 
 
-
-# if __name__ == "__main__":
-#     region_locator_GUI().mainloop()
     

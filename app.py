@@ -1,10 +1,12 @@
 import skipper
 import region_locator
+# import logging
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import *
 import threading
 import os.path
+
 
 Font_tuple = ('Digital-7', 9, 'bold')
 class App(tk.Tk):
@@ -50,7 +52,6 @@ class App(tk.Tk):
             self._btn_frame, 
             width = 5,
             relief = tk.RIDGE,
-            # fg='#E50914',
             font = Font_tuple,
             text='Start',
             command = lambda e=self._ents, b=self._bxes : self.start_skipper(e,b))
@@ -60,7 +61,6 @@ class App(tk.Tk):
             width = 5,
             relief = tk.RIDGE,
             font = Font_tuple,
-            # fg='#E50914', 
             text='Stop', 
             command= self.stop)
         
@@ -81,7 +81,14 @@ class App(tk.Tk):
         self._locator_btn.pack(side = LEFT, anchor=CENTER)
         self._stop_btn.pack(side = LEFT, anchor=CENTER)
         self._btn_frame.pack()
-        
+    
+    
+    def non_zero_numeric_input(self,P):
+    # checks if entry's value is an integer or empty and returns an appropriate boolean
+        if P.isdigit() and P != "":  # if a digit was entered or nothing was entered
+            return True
+        return False
+    
     # #check if directory exist and if image for condition exist
     def validate_img_path(self, boxes):
         if os.path.isdir("resource"):
@@ -115,12 +122,15 @@ class App(tk.Tk):
         entries = []
         boxes = []
         for field in fields:
+            int_var = IntVar()
             frame = tk.Frame(self)
             lab = tk.Label(frame, width=15, fg='#E50914', text=field, font=Font_tuple, anchor=W)
-            ent = tk.Entry(frame, width=5, bg = '#EDDBD7', fg='#0F0302', font=Font_tuple, textvariable = IntVar(), justify = 'c')
+            ent = tk.Entry(frame, width=5, bg = '#EDDBD7', fg='#0F0302', font=Font_tuple, textvariable = int_var, justify = 'c')
+            reg = self.register(self.non_zero_numeric_input)
             frame.pack(side=TOP, padx=5, pady=5)
             lab.pack(side=LEFT)
             ent.pack(side=RIGHT)
+            ent.config(validate="key", validatecommand=(reg,'%P'))
             entries.append((field, ent))
         
         for box in check_boxes:
@@ -172,7 +182,6 @@ class App(tk.Tk):
             self.status_update()
         except ValueError as err:
             messagebox.showerror("Error",err.args[0])
-
     
 if __name__=="__main__":
     App().mainloop()

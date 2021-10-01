@@ -30,6 +30,8 @@ who just want to sit back, relax, and enjoy their favourite shows hand-free!
     4. Click start and enjoy the marathon!
 
 5. Warning! If you stop midway, you will need to stop the tool and redo the math for **Start frame** and **Duration**
+    - 
+
 
 ## Library
 
