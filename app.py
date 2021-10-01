@@ -142,7 +142,7 @@ class App(tk.Tk):
 
 
     def start_skipper(self, entries = [], boxes = []):
-        self._thread = skipper.netflix_skipperino()
+        self._thread = skipper.netflix_skipperino(width=self.winfo_screenwidth(), height=self.winfo_screenheight())
         try:
             for e in entries:
                 if e[0] == "# of episodes" and isinstance(int(e[1].get()), int):
