@@ -13,14 +13,14 @@ who just want to sit back, relax, and enjoy their favourite shows hand-free!
     - y = y_top_left
     - width = x_bottom_right - x_top_left
     - height = y_bottom_right - y_top_right
-    - Top left placement
+    - Top left placement <br/>
     ![alt text](resource/top_left.png)
-    
-    - Bottom right placement
+
+    - Bottom right placement <br/>
     ![alt text](resource/bottom_right.png)
 
 3. Use screenshot button of locator tool to take a snap shot of the button and save it in the resouce folder under **recap.png for recap, intro.png for intro, and skip.png for skip**.
-    - An example of how the image should look like
+    - An example of how the image should look like <br/>
     ![alt text](resource/next.png)
 
 4. Go back to the xkipper tool
