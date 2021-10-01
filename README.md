@@ -13,11 +13,14 @@ who just want to sit back, relax, and enjoy their favourite shows hand-free!
     - y = y_top_left
     - width = x_bottom_right - x_top_left
     - height = y_bottom_right - y_top_right
-    - Top left placement ![alt text](resource/top_left.png)
-    - Bottom right placement ![alt text](resource/bottom_right.png)
+    - Top left placement 
+    ![alt text](resource/top_left.png)
+    - Bottom right placement 
+    ![alt text](resource/bottom_right.png)
 
 3. Use screenshot button of locator tool to take a snap shot of the button and save it in the resouce folder under **recap.png for recap, intro.png for intro, and skip.png for skip**.
-    - An example of how the image should look like ![alt text](resource/next.png)
+    - An example of how the image should look like 
+    ![alt text](resource/next.png)
 
 4. Go back to the xkipper tool
     1. Enter the estimate time of an epsiode and round up to closet minute i.e 23:30 -> 24 minutes. 
